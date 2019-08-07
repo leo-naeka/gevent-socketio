@@ -250,11 +250,12 @@ class WebsocketTransport(BaseTransport):
                 try:
                     websocket.send(message)
                 except (WebSocketError, TypeError) as e:
-                    print(e)
-                    raise
                     # We can't send a message on the socket
                     # it is dead, let the other sockets know
                     socket.disconnect()
+
+                    print(e)
+                    raise
 
         def read_from_ws():
             while True:
